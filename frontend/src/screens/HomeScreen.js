@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../actions/productActions';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../actions/productActions';
 
 export default function HomeScreen({ searchQuery, filteredProducts }) {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
     dispatch(listProducts());
   }, [dispatch]);
 
-  const displayedProducts = searchQuery ? filteredProducts : products;
+  const displayProducts = searchQuery ? filteredProducts : products;
 
   return (
     <div>
@@ -24,13 +24,9 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div className="row center">
-          {displayedProducts.length > 0 ? (
-            displayedProducts.map((product) => (
-              <Product key={product._id} product={product}></Product>
-            ))
-          ) : (
-            <MessageBox>No products found</MessageBox>
-          )}
+          {displayProducts.map((product) => (
+            <Product key={product._id} product={product}></Product>
+          ))}
         </div>
       )}
     </div>

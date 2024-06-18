@@ -126,7 +126,6 @@ a:hover {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  padding-left: 10px; /* Adjust padding-left as needed */
 }
 
 .search-bar.active {

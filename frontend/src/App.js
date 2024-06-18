@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -21,6 +21,7 @@ function App() {
   const [searchVisible, setSearchVisible] = useState(false); // State for search bar visibility
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const [filteredProducts, setFilteredProducts] = useState([]); // State for filtered products
+  const [loading, setLoading] = useState(false); // State for loading indicator
   const searchInputRef = useRef(null); // Ref for search input
 
   const cart = useSelector((state) => state.cart);
@@ -44,14 +45,32 @@ function App() {
     setSearchVisible(false);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // Implement search functionality here
+  const throttle = (func, limit) => {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func(...args);
+        inThrottle = true;
+        setTimeout(() => (inThrottle = false), limit);
+      }
+    };
+  };
+
+  const searchProducts = useCallback(() => {
+    setLoading(true);
     const regex = new RegExp(searchQuery, 'i'); // Create regex for case-insensitive search
     const filtered = products.filter((product) =>
       regex.test(product.name) || regex.test(product.description)
     );
     setFilteredProducts(filtered);
+    setLoading(false);
+  }, [searchQuery, products]);
+
+  const throttledSearch = useMemo(() => throttle(searchProducts, 300), [searchProducts]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    throttledSearch();
   };
 
   useEffect(() => {
@@ -77,18 +96,6 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    if (searchQuery === '') {
-      setFilteredProducts([]);
-    } else {
-      const regex = new RegExp(searchQuery, 'i'); // Create regex for case-insensitive search
-      const filtered = products.filter((product) =>
-        regex.test(product.name) || regex.test(product.description)
-      );
-      setFilteredProducts(filtered);
-    }
-  }, [searchQuery, products]);
-
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -101,16 +108,17 @@ function App() {
           <div className="header-links">
             <div className="search-bar-container">
               <div className={`search-bar ${searchVisible ? 'active' : ''}`}>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={(e) => e.preventDefault()}>
                   <input
                     type="text"
                     name="q"
                     id="q"
                     ref={searchInputRef}
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={handleSearchChange}
                     placeholder="Search products..."
                   />
+                  {loading && <div className="loading-spinner"></div>}
                 </form>
               </div>
               <i className={`fa fa-search search-icon ${searchVisible ? 'hidden' : ''}`} onClick={toggleSearch}></i>
