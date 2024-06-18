@@ -34,4 +34,16 @@ productRouter.get(
   })
 );
 
+productRouter.get('/', async (req, res) => {
+  const name = req.query.name || '';
+  const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+  
+  try {
+    const products = await Product.find({ ...nameFilter });
+    res.send(products);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
 export default productRouter;

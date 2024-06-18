@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -18,6 +18,10 @@ import SigninScreen from './screens/SigninScreen';
 import './App.css'; // Importing the CSS file for styling
 
 function App() {
+  const [searchVisible, setSearchVisible] = useState(false); // State for search bar visibility
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const searchInputRef = useRef(null); // Ref for search input
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -28,6 +32,21 @@ function App() {
     dispatch(signout());
   };
 
+  const toggleSearch = () => {
+    setSearchVisible(!searchVisible);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    // Implement search functionality here
+  };
+
+  useEffect(() => {
+    if (searchVisible) {
+      searchInputRef.current.focus();
+    }
+  }, [searchVisible]);
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -37,7 +56,20 @@ function App() {
               Shopify
             </Link>
           </div>
-          <div>
+          <div className="header-links">
+            <form className={`search-bar ${searchVisible ? 'active' : ''}`} onSubmit={submitHandler}>
+              <input 
+                type="text" 
+                name="q" 
+                id="q" 
+                ref={searchInputRef}
+                onChange={(e) => setSearchQuery(e.target.value)} 
+                placeholder="Search products..."
+              />
+            </form>
+            {!searchVisible && (
+              <i className="fa fa-search search-icon" onClick={toggleSearch}></i>
+            )}
             <Link to="/cart">
               <i className="fa fa-shopping-cart"></i> Cart
               {cartItems.length > 0 && (

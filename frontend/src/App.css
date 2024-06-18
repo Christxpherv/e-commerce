@@ -100,3 +100,36 @@ a {
 a:hover {
   color: #ff8000;
 }
+/* App.css */
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.search-bar {
+  display: none;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  margin-right: 1rem;
+}
+
+.search-bar.active {
+  display: flex;
+}
+
+.search-bar input {
+  width: 200px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-bar button {
+  display: none;
+}
