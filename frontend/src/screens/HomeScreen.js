@@ -20,7 +20,7 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
   const displayedProducts = searchQuery ? filteredProducts : products;
 
   return (
-    <div>
+    <div className="homescreen">
       {!searchQuery && (
         <div className="carousel-container">
           <Carousel
@@ -54,14 +54,16 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div className="row center">
-          {displayedProducts.length > 0 ? (
-            displayedProducts.map((product) => (
-              <Product key={product._id} product={product}></Product>
-            ))
-          ) : (
-            <MessageBox>No products found</MessageBox>
-          )}
+        <div className="product-container">
+          <div className="row center">
+            {displayedProducts.length > 0 ? (
+              displayedProducts.map((product) => (
+                <Product key={product._id} product={product}></Product>
+              ))
+            ) : (
+              <MessageBox>No products found</MessageBox>
+            )}
+          </div>
         </div>
       )}
     </div>

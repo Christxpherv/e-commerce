@@ -1,15 +1,25 @@
-.custom-carousel {
+.homescreen {
+    padding: 20px; /* Add padding to the entire screen */
+  }
+  
+  .custom-carousel {
     border-radius: 10px; /* Rounded corners */
-    max-width: 800px; /* Adjust max width as needed */
+    max-width: 85.75%; /* Adjust max width to fill the container */
     margin: auto; /* Center the carousel */
+    max-height: 300px; /* adjust the height for the carousel */
   }
   
   .custom-carousel .slide {
     border-radius: 10px; /* Rounded corners for individual slides */
   }
-
+  
   .custom-carousel img {
-    width: 300px; /* Set the desired width */
-    height: 400px; /* Set the desired height */
-    object-fit: cover; /* This will maintain aspect ratio and crop the image if necessary */
+    width: 100%; /* Set image width to fill the carousel */
+    height: auto; /* Let the height adjust automatically */
+    object-fit: cover; /* Maintain aspect ratio and crop if necessary */
   }
+  
+  .product-container {
+    margin-top: 20px; /* Adjust margin for space between carousel and products */
+  }
+  
