@@ -112,24 +112,45 @@ a:hover {
   margin-right: 1rem;
 }
 
-.search-bar {
-  display: none;
+.search-bar-container {
   position: relative;
-  transition: all 0.3s ease-in-out;
-  margin-right: 1rem;
+  width: fit-content;
+}
+
+.search-bar {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease-out;
+  border-radius: 20px; /* Rounded corners */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .search-bar.active {
-  display: flex;
+  width: 200px; /* Adjust width as per your design */
 }
 
 .search-bar input {
-  width: 200px;
+  width: 100%; /* Fill the width of the search bar */
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px; /* Rounded corners */
+  outline: none;
 }
 
-.search-bar button {
-  display: none;
+.search-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
+
+.search-icon.hidden {
+  opacity: 0;
+  pointer-events: none; /* Disable pointer events when hidden */
+}
+

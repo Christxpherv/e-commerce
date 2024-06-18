@@ -78,19 +78,21 @@ function App() {
             </Link>
           </div>
           <div className="header-links">
-            <form className={`search-bar ${searchVisible ? 'active' : ''}`} onSubmit={submitHandler}>
-              <input 
-                type="text" 
-                name="q" 
-                id="q" 
-                ref={searchInputRef}
-                onChange={(e) => setSearchQuery(e.target.value)} 
-                placeholder="Search products..."
-              />
-            </form>
-            {!searchVisible && (
-              <i className="fa fa-search search-icon" onClick={toggleSearch}></i>
-            )}
+            <div className="search-bar-container">
+              <div className={`search-bar ${searchVisible ? 'active' : ''}`}>
+                <form onSubmit={submitHandler}>
+                  <input
+                    type="text"
+                    name="q"
+                    id="q"
+                    ref={searchInputRef}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="  Search products..."
+                  />
+                </form>
+              </div>
+              <i className={`fa fa-search search-icon ${searchVisible ? 'hidden' : ''}`} onClick={toggleSearch}></i>
+            </div>
             <Link to="/cart">
               <i className="fa fa-shopping-cart"></i> Cart
               {cartItems.length > 0 && (
@@ -162,3 +164,4 @@ function App() {
 }
 
 export default App;
+
