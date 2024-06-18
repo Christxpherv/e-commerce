@@ -2,20 +2,27 @@
     padding: 20px; /* Add padding to the entire screen */
   }
   
-  .custom-carousel {
-    border-radius: 10px; /* Rounded corners */
+  .carousel-container {
     max-width: 85.75%; /* Adjust max width to fill the container */
     margin: auto; /* Center the carousel */
-    max-height: 300px; /* adjust the height for the carousel */
+  }
+  
+  .custom-carousel {
+    border-radius: 10px; /* Rounded corners */
+    max-height: 300px; /* Set a fixed max-height for the carousel */
+    overflow: hidden; /* Hide any overflow */
   }
   
   .custom-carousel .slide {
-    border-radius: 10px; /* Rounded corners for individual slides */
+    display: flex; /* Use Flexbox to center the content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    height: 300px; /* Set a fixed height for the slides */
   }
   
   .custom-carousel img {
     width: 100%; /* Set image width to fill the carousel */
-    height: auto; /* Let the height adjust automatically */
+    height: 100%; /* Set image height to fill the carousel */
     object-fit: cover; /* Maintain aspect ratio and crop if necessary */
   }
   

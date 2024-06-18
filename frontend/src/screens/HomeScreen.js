@@ -37,13 +37,13 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
             dynamicHeight={false}
             className="custom-carousel"
           >
-            <div>
+            <div className="slide">
               <img src="/images/sale.jpeg" alt="Slide 1" />
             </div>
-            <div>
+            <div className="slide">
               <img src="/images/sale2.jpeg" alt="Slide 2" />
             </div>
-            <div>
+            <div className="slide">
               <img src="/images/sale3.jpeg" alt="Slide 3" />
             </div>
           </Carousel>
