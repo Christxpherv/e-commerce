@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -20,6 +20,7 @@ import './App.css'; // Importing the CSS file for styling
 function App() {
   const [searchVisible, setSearchVisible] = useState(false); // State for search bar visibility
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [filteredProducts, setFilteredProducts] = useState([]); // State for filtered products
   const searchInputRef = useRef(null); // Ref for search input
 
   const cart = useSelector((state) => state.cart);
@@ -32,6 +33,9 @@ function App() {
     dispatch(signout());
   };
 
+  const productList = useSelector((state) => state.productList);
+  const { products } = productList;
+
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
   };
@@ -43,6 +47,11 @@ function App() {
   const submitHandler = (e) => {
     e.preventDefault();
     // Implement search functionality here
+    const regex = new RegExp(searchQuery, 'i'); // Create regex for case-insensitive search
+    const filtered = products.filter((product) =>
+      regex.test(product.name) || regex.test(product.description)
+    );
+    setFilteredProducts(filtered);
   };
 
   useEffect(() => {
@@ -68,6 +77,18 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (searchQuery === '') {
+      setFilteredProducts([]);
+    } else {
+      const regex = new RegExp(searchQuery, 'i'); // Create regex for case-insensitive search
+      const filtered = products.filter((product) =>
+        regex.test(product.name) || regex.test(product.description)
+      );
+      setFilteredProducts(filtered);
+    }
+  }, [searchQuery, products]);
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -86,6 +107,7 @@ function App() {
                     name="q"
                     id="q"
                     ref={searchInputRef}
+                    value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
                   />
@@ -155,7 +177,9 @@ function App() {
           <Route path="/order/:id" component={OrderScreen}></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/" exact render={() => (
+            <HomeScreen searchQuery={searchQuery} filteredProducts={filteredProducts} />
+          )}></Route>
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>
@@ -164,4 +188,3 @@ function App() {
 }
 
 export default App;
-
