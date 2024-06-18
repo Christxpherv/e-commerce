@@ -36,6 +36,10 @@ function App() {
     setSearchVisible(!searchVisible);
   };
 
+  const closeSearch = () => {
+    setSearchVisible(false);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     // Implement search functionality here
@@ -46,6 +50,23 @@ function App() {
       searchInputRef.current.focus();
     }
   }, [searchVisible]);
+
+  useEffect(() => {
+    // Function to close search bar when clicking away
+    const handleClickOutside = (event) => {
+      if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
+        closeSearch();
+      }
+    };
+
+    // Attach the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <BrowserRouter>
