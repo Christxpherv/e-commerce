@@ -87,7 +87,7 @@ function App() {
                     id="q"
                     ref={searchInputRef}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="  Search products..."
+                    placeholder="Search products..."
                   />
                 </form>
               </div>
