@@ -1,0 +1,15 @@
+.custom-carousel {
+    border-radius: 10px; /* Rounded corners */
+    max-width: 800px; /* Adjust max width as needed */
+    margin: auto; /* Center the carousel */
+  }
+  
+  .custom-carousel .slide {
+    border-radius: 10px; /* Rounded corners for individual slides */
+  }
+
+  .custom-carousel img {
+    width: 300px; /* Set the desired width */
+    height: 400px; /* Set the desired height */
+    object-fit: cover; /* This will maintain aspect ratio and crop the image if necessary */
+  }

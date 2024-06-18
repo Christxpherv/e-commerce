@@ -4,6 +4,9 @@ import { listProducts } from '../actions/productActions';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './css/HomeScreen.css';
 
 export default function HomeScreen({ searchQuery, filteredProducts }) {
   const dispatch = useDispatch();
@@ -18,6 +21,34 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
 
   return (
     <div>
+      {!searchQuery && (
+        <div className="carousel-container">
+          <Carousel
+            showArrows={false} // Remove arrows
+            showStatus={false}
+            showIndicators={true} // Show dots (indicators)
+            showThumbs={false}
+            emulateTouch={true}
+            infiniteLoop={true}
+            autoPlay={true}
+            interval={5000}
+            stopOnHover={true}
+            swipeable={true}
+            dynamicHeight={false}
+            className="custom-carousel"
+          >
+            <div>
+              <img src="/images/sale.jpeg" alt="Slide 1" />
+            </div>
+            <div>
+              <img src="/images/sale2.jpeg" alt="Slide 2" />
+            </div>
+            <div>
+              <img src="/images/sale3.jpeg" alt="Slide 3" />
+            </div>
+          </Carousel>
+        </div>
+      )}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
