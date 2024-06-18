@@ -100,3 +100,57 @@ a {
 a:hover {
   color: #ff8000;
 }
+/* App.css */
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.search-bar-container {
+  position: relative;
+  width: fit-content;
+}
+
+.search-bar {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease-out;
+  border-radius: 20px; /* Rounded corners */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-bar.active {
+  width: 200px; /* Adjust width as per your design */
+}
+
+.search-bar input {
+  width: calc(100% - 20px); /* Fill the width of the search bar minus padding-left */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded corners */
+  outline: none;
+}
+
+.search-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.search-icon.hidden {
+  opacity: 0;
+  pointer-events: none; /* Disable pointer events when hidden */
+}
+
