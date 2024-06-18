@@ -9,7 +9,7 @@
   
   .custom-carousel {
     border-radius: 10px; /* Rounded corners */
-    max-height: 300px; /* Set a fixed max-height for the carousel */
+    max-height: 325px; /* Set a fixed max-height for the carousel */
     overflow: hidden; /* Hide any overflow */
   }
   
@@ -17,7 +17,7 @@
     display: flex; /* Use Flexbox to center the content */
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
-    height: 300px; /* Set a fixed height for the slides */
+    height: 325px; /* Set a fixed height for the slides */
   }
   
   .custom-carousel img {

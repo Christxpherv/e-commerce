@@ -44,7 +44,7 @@ export default function HomeScreen({ searchQuery, filteredProducts }) {
               <img src="/images/sale2.jpeg" alt="Slide 2" />
             </div>
             <div className="slide">
-              <img src="/images/sale3.jpeg" alt="Slide 3" />
+              <img src="/images/sale5.jpg" alt="Slide 3" />
             </div>
           </Carousel>
         </div>
