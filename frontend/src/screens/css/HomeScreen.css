@@ -1,0 +1,32 @@
+.homescreen {
+    padding: 20px; /* Add padding to the entire screen */
+  }
+  
+  .carousel-container {
+    max-width: 85.75%; /* Adjust max width to fill the container */
+    margin: auto; /* Center the carousel */
+  }
+  
+  .custom-carousel {
+    border-radius: 10px; /* Rounded corners */
+    max-height: 325px; /* Set a fixed max-height for the carousel */
+    overflow: hidden; /* Hide any overflow */
+  }
+  
+  .custom-carousel .slide {
+    display: flex; /* Use Flexbox to center the content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    height: 325px; /* Set a fixed height for the slides */
+  }
+  
+  .custom-carousel img {
+    width: 100%; /* Set image width to fill the carousel */
+    height: 100%; /* Set image height to fill the carousel */
+    object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+  }
+  
+  .product-container {
+    margin-top: 20px; /* Adjust margin for space between carousel and products */
+  }
+  
